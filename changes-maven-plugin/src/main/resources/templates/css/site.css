@@ -1,0 +1,20 @@
+
+@font-face {
+  font-family: 'GEInspira';
+  src: url('../font/ge-inspira.eot') format('eot'),
+       url('../font/ge-inspira.woff') format('woff'),
+       url('../font/ge-inspira.ttf') format('truetype');
+}
+
+
+body{
+	background: #fff;
+	padding: 0px;
+	margin: 0px;
+	font-family: 'GEInspira', Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+.release{
+	border: 1px #f3f3f3 solid;
+	padding: 8px;
+}

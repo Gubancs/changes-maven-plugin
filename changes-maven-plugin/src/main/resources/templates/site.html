@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title th:text="${changesDocument.properties.title}">Release
+	history</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="css/bootstrap-theme.min.css"></link>
+
+<!-- Latest compiled and minified CSS -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/> -->
+
+<!-- Optional theme -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/> -->
+
+<link rel="stylesheet" type="text/css" href="css/site.css"></link>
+
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body lang="hu" th:lang="${language}">
+
+	<div class="container">
+		<div class="page-header">
+			<h1>
+				<span th:text="${rootProject.artifact.artifactId}">Release
+					history</span> <small th:text="${rootProject.artifact.version}">2.0.0</small>
+			</h1>
+		</div>
+	</div>
+
+
+	<div class="container">
+
+		<div class="row">
+
+			<!-- List of arrtifacts -->
+			<div class="col-md-3">
+				<div class="panel panel-primary">
+					<!-- Default panel contents -->
+					<div class="panel-heading">
+						<h4>Artifacts</h4>
+					</div>
+
+					<div class="list-group">
+						<a th:each="a : ${artifacts}"
+							th:classappend="${project.artifactId == a.artifactId} ? active"
+							th:href="${a.artifactId}+'.'+${extension}"
+							class="list-group-item"><span th:text="${a.artifactId}">ArtifactId</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<!-- End of list of artifacts -->
+
+			<!-- release history -->
+			<div class="col-md-9">
+				<div class="panel panel-primary">
+					<!-- Default panel contents -->
+					<div class="panel-heading">
+						<h4>
+							RELEASE HISTORY <span th:text="${project.artifactId}">Artifact</span>
+						</h4>
+					</div>
+
+
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th><span th:tex="#{label.version}">Version</span></th>
+								<th><span th:tex="#{label.date}">Date</span></th>
+								<th><span th:tex="#{label.description}">Description</span></th>
+							</tr>
+
+						</thead>
+						<tbody>
+							<tr th:each="release : ${changesDocument.body.release}">
+								<td><span th:text="${release.version}"
+									class="label label-default">1.0.0</span></td>
+								<td><span th:text="${release.date}">Now</span></td>
+								<td><span th:text="${release.description}">First
+										release</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- End of release history -->
+
+			<!-- List of change sets for artifact -->
+			<div class="col-md-9 col-md-offset-3">
+				<div class="panel panel-primary"
+					th:each="release : ${changesDocument.body.release}">
+					<!-- Default panel contents -->
+					<div class="panel-heading">
+						<h5>
+							Release <span th:text="${release.version}">1.0.0</span> - <span
+								th:text="${release.date}">2011-01-01</span>
+						</h5>
+					</div>
+
+					<div class="panel-body">
+						<p th:text="${release.description}">Description of the release</p>
+					</div>
+
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th></th>
+								<th><strong th:tex="#{label.acitonType}">Type</strong></th>
+								<th><strong th:tex="#{label.author}">Author</strong></th>
+								<th><strong th:tex="#{label.date}">Date</strong></th>
+								<th><strong th:tex="#{label.change}">Change</strong></th>
+								<th><strong th:tex="#{label.issue}">Issue</strong></th>
+							</tr>
+
+						</thead>
+						<tbody>
+							<tr th:each="action,status : ${release.action}">
+								<td><span th:text="${status.index+1}">1.</span></td>
+								<td><span th:text="${action.type}"
+									class="glyphicon glyphicon-plus" aria-hidden="true"></span></td>
+								<td><span th:text="${action.dev}">Gabor</span></td>
+								<td><span th:text="${action.date}">2001-01-01</span></td>
+								<td><span th:text="${action.content[0]}">Modified
+										domestic transfer creation business logic, frontend design
+										improvements.</span></td>
+								<td><a th:text="${action.issue}">NB-2332</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
