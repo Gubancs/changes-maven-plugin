@@ -1,64 +1,90 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<!-- Project information -->
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>com.topclouders</groupId>
-	<artifactId>changes-maven-plugin</artifactId>
-	<version>1.0.0-RELEASE</version>
+	<artifactId>release-site-plugin</artifactId>
+	<version>1.1.0-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
+	<name>release-site-plugin</name>
+	<url>http://www.topclouders.com</url>
 
-	<name>changes-maven-plugin Maven Plugin</name>
+	<!-- Project description -->
+	<description>This is a maven plugin that allows you to supports generate a release site from multi module maven projects. This plugin will be collect the changes.xml files in your artifacts and will generate a HTML site, that contains the artifact release history.</description>
 
-	<!-- FIXME change it to the project's website -->
-	<url>http://maven.apache.org</url>
-
+	<!-- Project properties -->
 	<properties>
+		<java.version>1.7</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- Dependency version management -->
+		<maven.plugin.version>3.3.3</maven.plugin.version>
+		<maven.project.version>2.2.1</maven.project.version>
+		<maven.plugin.annotations.version>3.4</maven.plugin.annotations.version>
+		<plexus.utils.version>3.0.22</plexus.utils.version>
+		<thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
+		<commons.io.version>2.4</commons.io.version>
+		<slf4j.version>1.7.12</slf4j.version>
+
+		<!-- Test dependency version management -->
+		<junit.version>4.12</junit.version>
+
+
+		<!-- Plugin version management -->
+		<maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
+		<jaxb2.maven.plugin.version>2.1</jaxb2.maven.plugin.version>
 	</properties>
 
+	<!-- Dependencies -->
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-plugin-api</artifactId>
-			<version>2.0</version>
+			<version>${maven.plugin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-project</artifactId>
-			<version>2.0</version>
+			<version>${maven.project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-core</artifactId>
+			<version>${maven.plugin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven.plugin-tools</groupId>
 			<artifactId>maven-plugin-annotations</artifactId>
-			<version>3.2</version>
+			<version>${maven.plugin.annotations.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.plexus</groupId>
 			<artifactId>plexus-utils</artifactId>
-			<version>3.0.8</version>
+			<version>${plexus.utils.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf</artifactId>
-			<version>2.1.4.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.2.1</version>
+			<version>${thymeleaf.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.4</version>
+			<version>${commons.io.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -67,30 +93,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
+				<version>${maven.compiler.plugin.version}</version>
 				<configuration>
-					<target>1.8</target>
-					<source>1.8</source>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jaxb2-maven-plugin</artifactId>
-				<version>2.1</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>xjc</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<failOnNoSchemas>true</failOnNoSchemas>
-					<createJavaDocAnnotations>true</createJavaDocAnnotations>
+					<target>${java.version}</target>
+					<source>${java.version}</source>
 					<encoding>${project.build.sourceEncoding}</encoding>
-					<sources>
-						<source>src/main/resources/xsd/changes-1.0.0.xsd</source>
-					</sources>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -118,4 +125,44 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<!-- Source Code Management -->
+	<scm>
+		<connection>scm:git:https://github.com/Gubancs/changes-maven-plugin.git</connection>
+		<developerConnection>scm:git:git@github.com:Gubancs/changes-maven-plugin.git</developerConnection>
+		<url>https://github.com/Gubancs/changes-maven-plugin.git</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<!-- Licence -->
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<!-- Distribution management -->
+	<distributionManagement>
+		<repository>
+			<id>oss.sonatype.org</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+		<snapshotRepository>
+			<id>oss.sonatype.org</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+
+	<!-- Project developers -->
+	<developers>
+		<developer>
+			<name>Gabor Kokeny</name>
+			<email>kokeny19@gmail.com</email>
+			<organization>Toplcouders Hungary Ltd</organization>
+		</developer>
+	</developers>
+
 </project>

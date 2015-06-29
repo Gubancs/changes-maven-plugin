@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.topclouders.plugin;
+package com.topclouders.releaseplugin.xml;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +29,7 @@ import javax.xml.bind.Unmarshaller;
  * @version 1.0.0
  * 
  */
-public class JaxbFactory {
+public final class JaxbFactory {
 
 	private static final Map<String, JaxbFactory> singletonMap = new HashMap<>();
 
@@ -62,7 +62,7 @@ public class JaxbFactory {
 	 * 
 	 * @throws JAXBException
 	 */
-	public Unmarshaller getUnmarshaller() throws JAXBException {
+	public Unmarshaller unmarshaller() throws JAXBException {
 		Unmarshaller um = unmarshaller.get();
 		if (um == null) {
 			JAXBContext jc = JAXBContext.newInstance(this.contextPath);

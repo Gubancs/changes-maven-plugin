@@ -18,9 +18,8 @@
 
 <link rel="stylesheet" type="text/css" href="css/site.css"></link>
 
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
 </head>
 <body lang="hu" th:lang="${language}">
 
@@ -122,13 +121,23 @@
 						<tbody>
 							<tr th:each="action,status : ${release.action}">
 								<td><span th:text="${status.index+1}">1.</span></td>
-								<td><span th:text="${action.type}"
-									class="glyphicon glyphicon-plus" aria-hidden="true"></span></td>
+
+								<!-- Type -->
+								<td><i th:text="${action.type}"
+									class="fa fa-remove" ></i></td>
+
+								<!-- Author -->
 								<td><span th:text="${action.dev}">Gabor</span></td>
+
+								<!-- Date -->
 								<td><span th:text="${action.date}">2001-01-01</span></td>
+
+								<!-- Change -->
 								<td><span th:text="${action.content[0]}">Modified
 										domestic transfer creation business logic, frontend design
 										improvements.</span></td>
+
+								<!-- Issue -->
 								<td><a th:text="${action.issue}">NB-2332</a></td>
 							</tr>
 						</tbody>

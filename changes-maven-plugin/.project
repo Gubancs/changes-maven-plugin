@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>changes-maven-plugin</name>
+	<name>release-site-plugin</name>
 	<comment></comment>
 	<projects>
 	</projects>
